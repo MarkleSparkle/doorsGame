@@ -25,8 +25,14 @@ public class Main extends Application {
 			text.setText("MORE text...");
 			text.setX(50);
 			text.setY(50);
-			gp1.add(text, 0, 0);
 
+			Text text2 = new Text();
+			text2.setText("Another one");
+			text2.setX(399);
+			text2.setY(399);
+
+			gp1.add(text, 5, 5);
+			gp1.add(text2, 399, 399);
 
 
 			primaryStage.setScene(scene);
