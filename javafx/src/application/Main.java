@@ -27,7 +27,9 @@ public class Main extends Application {
 			text.setY(50);
 			gp1.add(text, 0, 0);
 
-
+			Text meow = new Text();
+			meow.setText("MEOW");
+			gp1.add(meow, 100, 100);
 
 			primaryStage.setScene(scene);
 			primaryStage.show();
