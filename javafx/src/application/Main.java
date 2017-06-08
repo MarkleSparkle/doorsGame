@@ -26,6 +26,7 @@ public class Main extends Application {
 			text.setX(50);
 			text.setY(50);
 
+//<<<<<<< HEAD
 			Text text2 = new Text();
 			text2.setText("Another one");
 			text2.setX(399);
@@ -34,6 +35,11 @@ public class Main extends Application {
 			gp1.add(text, 5, 5);
 			gp1.add(text2, 399, 399);
 
+//=======
+			Text meow = new Text();
+			meow.setText("MEOW");
+			gp1.add(meow, 100, 100);
+//>>>>>>> branch 'master' of https://github.com/MarkleSparkle/doorsGame.git
 
 			primaryStage.setScene(scene);
 			primaryStage.show();
