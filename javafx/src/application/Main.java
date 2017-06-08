@@ -3,10 +3,15 @@ package application;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 
 
 public class Main extends Application {
@@ -16,31 +21,39 @@ public class Main extends Application {
 
 			GridPane gp1 = new GridPane();
 
-			Scene scene = new Scene(gp1,400,400);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			primaryStage.setTitle("Doors.exe");
 
-			primaryStage.setTitle("This is the Title");
 
-			Text text = new Text();
-			text.setText("MORE text...");
-			text.setX(50);
-			text.setY(50);
+			Text title = new Text();
+			title.setText("Our DOOR Game");
+/*			Text textLeft = new Text();
+			title.setText("Left");*/
+/*			Text textRight = new Text();
+			title.setText("Right");
+*/
+			Button play = new Button("PLAY");
+			Button options = new Button("OPTIONS");
 
-//<<<<<<< HEAD
-			Text text2 = new Text();
-			text2.setText("Another one");
-			text2.setX(399);
-			text2.setY(399);
+			HBox hbox = new HBox();
+			hbox.getChildren().addAll(title);
+			hbox.setAlignment(Pos.TOP_CENTER);
 
-			gp1.add(text, 5, 5);
-			gp1.add(text2, 399, 399);
+			VBox vbox = new VBox();
+			vbox.setAlignment(Pos.CENTER);
+			vbox.setPadding(new Insets(35,35,35,35));
+			vbox.setSpacing(10);
+			vbox.getChildren().addAll(play,options);
 
-//=======
-			Text meow = new Text();
-			meow.setText("MEOW");
-			gp1.add(meow, 100, 100);
-//>>>>>>> branch 'master' of https://github.com/MarkleSparkle/doorsGame.git
+			BorderPane bp = new BorderPane();
+			bp.setTop(hbox);
+			bp.setCenter(vbox);
 
+			primaryStage.setMinHeight(500);
+			primaryStage.setMinWidth(500);
+			primaryStage.setMaxHeight(500);
+			primaryStage.setMaxWidth(500);
+
+			Scene scene = new Scene(bp,400,400);
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch(Exception e) {
