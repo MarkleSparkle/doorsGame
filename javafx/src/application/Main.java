@@ -46,7 +46,9 @@ public class Main extends Application {
 			play.setMinWidth(300);
 			play.setMinHeight(50);
 			Button options = new Button("OPTIONS");
-
+			options.setMinWidth(300);
+			options.setMinHeight(50);
+			
 			HBox hbox = new HBox();
 			hbox.getChildren().addAll(scenetitle);
 			hbox.setAlignment(Pos.TOP_CENTER);
@@ -55,7 +57,7 @@ public class Main extends Application {
 			vbox.setStyle("-fx-background: #FFFFFF;");
 			vbox.setAlignment(Pos.CENTER);
 			vbox.setPadding(new Insets(35,35,35,35));
-			vbox.setSpacing(10);
+			vbox.setSpacing(30);
 			vbox.getChildren().addAll(play,options);
 
 			root.setTop(hbox);
