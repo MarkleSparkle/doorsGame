@@ -4,10 +4,14 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -45,6 +49,7 @@ public class Main extends Application {
 			
 			//title
 			HBox titleBox = new HBox();//creating the Scene Title
+			titleBox.setBackground(new Background(new BackgroundFill(Color.web("0x8BD9D5",0.25), new CornerRadii(0), new Insets(0,0,0,0))));//setting the background of the box
 			Text sceneTitle = new Text("This is our Scene Title ");
 			sceneTitle.setFont(Font.font("Arial", FontWeight.BOLD, 30));//creating text and adding font, weight and size
 			titleBox.getChildren().addAll(sceneTitle);//adding the text to the HBox
@@ -54,6 +59,8 @@ public class Main extends Application {
 			
 			//buttons
 			Button play = new Button("PLAY");//creating Play Button
+			play.setBackground(new Background(new BackgroundFill(Color.web("0x8BD9D5",1), new CornerRadii(25), new Insets(0,0,0,0))));//background of button
+			//play.hoverProperty();//TODO look at this!
 			play.setMinWidth(300);//setting values
 			play.setMinHeight(50);
 			play.setOnAction(e -> scene2(primaryStage));
@@ -75,7 +82,8 @@ public class Main extends Application {
 			play.setMinHeight(50);
 			back.setOnAction(e -> scene1(primaryStage));
 			
-			HBox hbox = new HBox();
+			HBox hbox = new HBox();									//color				//roundness			//padding
+			hbox.setBackground(new Background(new BackgroundFill(Color.web("0x8BD9D5"), new CornerRadii(0), new Insets(10,10,10,10))));//setting the background of the box
 			hbox.setPadding(new Insets(25,25,25,25));//set padding of box
 			hbox.setAlignment(Pos.CENTER);
 			hbox.getChildren().addAll(back);//adding button the the box
