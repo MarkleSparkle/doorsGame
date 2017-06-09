@@ -1,9 +1,13 @@
 package application;
 
+import java.io.File;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
@@ -39,6 +43,8 @@ public class Main extends Application {
 			primaryStage.setTitle("Doors.exe");//setting the title of the window
 
 			/************************** Setting Up Variables**************************/
+
+			String name = "";
 
 				/***** Scene 1 *****/
 
@@ -77,19 +83,28 @@ public class Main extends Application {
 
 				/***** Scene 2 *****/
 
-
-			Button back = new Button("PAUSE");//creating a new button
+/*			Button back = new Button("PAUSE");//creating a new button
 			back.setMinWidth(50);//setting values
 			back.setMinHeight(50);
 			back.setBackground(new Background(new BackgroundFill(Color.web("0xFFFF00"), new CornerRadii(0), new Insets(10,10,10,10))));
-			back.setOnAction(e -> scene1(primaryStage));
+			back.setOnAction(e -> scene1(primaryStage));*/
 
-			//TODO "how to use HBox"
-			HBox displayMenu = new HBox();									//color				//roundness			//padding
+			//top menu
+			GridPane displayMenu = new GridPane();									//color				//roundness			//padding
 			displayMenu.setBackground(new Background(new BackgroundFill(Color.web("0x8BD9D5"), new CornerRadii(0), new Insets(10,10,10,10))));//setting the background of the box
-			displayMenu.setPadding(new Insets(25,25,25,25));//set padding of box
-			displayMenu.setAlignment(Pos.CENTER);
-			displayMenu.getChildren().addAll(back);//adding button the the box
+			displayMenu.setPadding(new Insets(15,25,15,25));//set padding of box
+
+		    // Category in column 2, row 0
+		    Text category = new Text(""+name+"Jimmy");
+		    category.setFont(Font.font("Arial", FontWeight.BOLD, 20));
+		    displayMenu.add(category, 1, 0);
+
+	        File file = new File("bin/application/content/pause.png");
+	        Image image = new Image(file.toURI().toString());
+	        ImageView imageView = new ImageView();
+	        imageView.setImage(image);
+		    // Pause icon in column 6, row 0
+		    displayMenu.add(imageView, 5 , 0);
 
 
 			root2.setTop(displayMenu);
