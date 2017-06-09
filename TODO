@@ -1,13 +1,10 @@
 
-- ImageView (image as background for main menu)
-- Create (X,Y) image for the background of program
+- Create (X,Y) image for the background of main menu
     - View for inspiration
         - http://www.freepik.com/free-vector/polygonal-shapes-on-a-transparent-background_1074458.htm#term=modern background&page=1&position=0
 
-- Size of buttons and functionality to a second scene (beginning of game [for now(characters implemented later)])
 - Color of buttons (gradient if possible) [try adding an id to the button and accessing the style through the id]
     - View for gradient
         http://docs.oracle.com/javafx/2/get_started/animation.htm
 
 - Create a Title Image (whether its part of the background or not)
-- See if animation is possible to be added
