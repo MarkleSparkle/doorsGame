@@ -8,65 +8,84 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 
-
 public class Main extends Application {
+	
+	Scene scene1, scene2;//Scene 1 is Menu, Scene 2 is the game
+	
 	@Override
 	public void start(Stage primaryStage) {
 		try {
+			/************************** Setting up Basics **************************/
+			
+			//setting up the stage, scene and root
 			BorderPane root = new BorderPane();
-			root.setId("pane");
-			Scene scene = new Scene(root,400,400);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			primaryStage.setTitle("Doors.exe");
-
+			BorderPane root2 = new BorderPane();//creating the root layouts for the scenes
+			root.setId("pane");//setting an ID to a root (for CSS)
 			
-
-/*			Text title = new Text();
-			title.setText("Our DOOR Game");
-			Text textLeft = new Text();
-			title.setText("Left");
-			Text textRight = new Text();
-			title.setText("Right");*/
-
-			Text scenetitle = new Text("This is our title");
-			scenetitle.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
-
-			//creating buttons
-			Button play = new Button("PLAY");
-			play.setMinWidth(300);
-			play.setMinHeight(50);
-			Button options = new Button("OPTIONS");
-			options.setMinWidth(300);
-			options.setMinHeight(50);
+			scene1 = new Scene(root,500,500);//creating scene1
+			scene1.getStylesheets().add(getClass().getResource("application.css").toExternalForm());//getting the style sheet for scene1
+			scene2 = new Scene(root2,800,600);//creating scene1
+			scene2.getStylesheets().add(getClass().getResource("application.css").toExternalForm());//getting the style sheet for scene1
+			primaryStage.setTitle("Doors.exe");//setting the title of the window
 			
-			HBox hbox = new HBox();
-			hbox.getChildren().addAll(scenetitle);
-			hbox.setAlignment(Pos.TOP_CENTER);
-
-			VBox vbox = new VBox();
-			vbox.setStyle("-fx-background: #FFFFFF;");
-			vbox.setAlignment(Pos.CENTER);
-			vbox.setPadding(new Insets(35,35,35,35));
-			vbox.setSpacing(30);
-			vbox.getChildren().addAll(play,options);
-
-			root.setTop(hbox);
-			root.setCenter(vbox);
-
+			/************************** Setting Up Variables**************************/
+			
+			/***** Scene 1 *****/
+			
 			primaryStage.setMinHeight(500);
 			primaryStage.setMinWidth(500);
 			primaryStage.setMaxHeight(500);
 			primaryStage.setMaxWidth(500);
+			
+			//title
+			HBox titleBox = new HBox();//creating the Scene Title
+			Text sceneTitle = new Text("This is our Scene Title ");
+			sceneTitle.setFont(Font.font("Arial", FontWeight.BOLD, 30));//creating text and adding font, weight and size
+			titleBox.getChildren().addAll(sceneTitle);//adding the text to the HBox
+			titleBox.setAlignment(Pos.TOP_CENTER);
+			titleBox.setPadding(new Insets(25,25,25,25));
 
-			primaryStage.setScene(scene);
+			
+			//buttons
+			Button play = new Button("PLAY");//creating Play Button
+			play.setMinWidth(300);//setting values
+			play.setMinHeight(50);
+			play.setOnAction(e -> scene2(primaryStage));
+			
+			VBox vbox = new VBox();//creating a VBox for the buttons
+			vbox.setAlignment(Pos.CENTER);//alignment
+			vbox.setPadding(new Insets(35,35,35,35));//padding of box
+			vbox.setSpacing(30);//spacing of elements
+			vbox.getChildren().addAll(play);//adding buttons to the box
+			
+			
+			root.setTop(titleBox);//compiling the root
+			root.setCenter(vbox);
+
+			/***** Scene 2 *****/
+			
+			Button back = new Button("Back");//creating a new button
+			play.setMinWidth(300);//setting values
+			play.setMinHeight(50);
+			back.setOnAction(e -> scene1(primaryStage));
+			
+			HBox hbox = new HBox();
+			hbox.setPadding(new Insets(25,25,25,25));//set padding of box
+			hbox.setAlignment(Pos.CENTER);
+			hbox.getChildren().addAll(back);//adding button the the box
+			
+			
+			root2.setBottom(hbox);
+			
+			/************************** Compiling Program **************************/
+			
+			primaryStage.setScene(scene1);
 			primaryStage.show();
 
 		} catch(Exception e) {
@@ -76,5 +95,26 @@ public class Main extends Application {
 
 	public static void main(String[] args) {
 		launch(args);
+	}
+	
+	public void scene1(Stage primaryStage){//onClick of the BACK button
+		
+		primaryStage.setMinHeight(500);
+		primaryStage.setMinWidth(500);//sets the dimensions of the stage
+		primaryStage.setMaxHeight(500);
+		primaryStage.setMaxWidth(500);
+		
+		primaryStage.setScene(scene1);
+		
+	}
+	
+	public void scene2(Stage primaryStage){//onClick of the PLAY button
+		
+		primaryStage.setMinHeight(600);
+		primaryStage.setMinWidth(800);//sets the dimensions of the stage
+		primaryStage.setMaxHeight(600);
+		primaryStage.setMaxWidth(800);
+		
+		primaryStage.setScene(scene2);//goes to scene two 
 	}
 }
