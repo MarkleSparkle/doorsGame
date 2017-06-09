@@ -22,11 +22,9 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			BorderPane root = new BorderPane();
-
+			root.setId("pane");
 			Scene scene = new Scene(root,400,400);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			GridPane gp1 = new GridPane();
-
 			primaryStage.setTitle("Doors.exe");
 
 			
