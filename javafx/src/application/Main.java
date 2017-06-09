@@ -29,6 +29,7 @@ public class Main extends Application {
 
 			primaryStage.setTitle("Doors.exe");
 
+			
 
 /*			Text title = new Text();
 			title.setText("Our DOOR Game");
@@ -42,6 +43,8 @@ public class Main extends Application {
 
 			//creating buttons
 			Button play = new Button("PLAY");
+			play.setMinWidth(300);
+			play.setMinHeight(50);
 			Button options = new Button("OPTIONS");
 
 			HBox hbox = new HBox();
