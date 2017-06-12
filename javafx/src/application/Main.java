@@ -1,6 +1,7 @@
 package application;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -25,6 +26,8 @@ import javafx.geometry.Pos;
 public class Main extends Application {
 
 	Scene scene1, scene2;//Scene 1 is Menu, Scene 2 is the game
+	private static ArrayList<Integer> roomUsed =new ArrayList<Integer>();
+
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -46,7 +49,7 @@ public class Main extends Application {
 
 			String name = "";
 
-				/***** Scene 1 *****/
+			/***** Scene 1 *****/
 
 			primaryStage.setMinHeight(500);
 			primaryStage.setMinWidth(500);
@@ -66,7 +69,7 @@ public class Main extends Application {
 			//buttons
 			Button play = new Button("PLAY");//creating Play Button
 			play.setBackground(new Background(new BackgroundFill(Color.web("0x8BD9D5",1), new CornerRadii(25), new Insets(0,0,0,0))));//background of button
-				//play.hoverProperty();//TODO look at this!
+			//play.hoverProperty();//TODO look at this!
 			play.setMinWidth(300);//setting values
 			play.setMinHeight(50);
 			play.setOnAction(e -> scene2(primaryStage));
@@ -81,9 +84,9 @@ public class Main extends Application {
 			root.setTop(titleBox);//compiling the root
 			root.setCenter(vbox);
 
-				/***** Scene 2 *****/
+			/***** Scene 2 *****/
 
-/*			Button back = new Button("PAUSE");//creating a new button
+			/*			Button back = new Button("PAUSE");//creating a new button
 			back.setMinWidth(50);//setting values
 			back.setMinHeight(50);
 			back.setBackground(new Background(new BackgroundFill(Color.web("0xFFFF00"), new CornerRadii(0), new Insets(10,10,10,10))));
@@ -94,24 +97,24 @@ public class Main extends Application {
 			displayMenu.setBackground(new Background(new BackgroundFill(Color.web("0x8BD9D5"), new CornerRadii(0), new Insets(10,10,10,10))));//setting the background of the box
 			displayMenu.setPadding(new Insets(15,25,15,25));//set padding of box
 
-		    // Category in column 2, row 0
-		    Text category = new Text(""+name+"Jimmy");
-		    category.setFont(Font.font("Arial", FontWeight.BOLD, 20));
-		    displayMenu.add(category, 1, 0);
+			// Category in column 2, row 0
+			Text category = new Text(""+name+"Jimmy");
+			category.setFont(Font.font("Arial", FontWeight.BOLD, 20));
+			displayMenu.add(category, 1, 0);
 
 
-	        File file = new File("bin/application/content/pause2.png");
-	        Image image = new Image(file.toURI().toString());
-	        ImageView imageView = new ImageView();
-	        imageView.setImage(image);
-		    // Pause icon in column 6, row 0
-		    displayMenu.add(imageView, 5 , 0);
+			File file = new File("bin/application/content/pause2.png");
+			Image image = new Image(file.toURI().toString());
+			ImageView imageView = new ImageView();
+			imageView.setImage(image);
+			// Pause icon in column 6, row 0
+			displayMenu.add(imageView, 5 , 0);
 
-/*		    Button button = new Button("Button");
-		    button.setOnAction(e -> Board.getRoom(primaryStage, scene1));*/
+			Button button = new Button("Button");
+			button.setOnAction(e -> getRoom(primaryStage, scene1));
 
 			root2.setTop(displayMenu);
-//			root2.setCenter(button);
+			root2.setCenter(button);
 			/************************** Compiling Program **************************/
 
 			primaryStage.setScene(scene1);
@@ -126,7 +129,7 @@ public class Main extends Application {
 		launch(args);
 	}
 
-	public void scene1(Stage primaryStage){//onClick of the BACK button
+	public  void scene1(Stage primaryStage){//onClick of the BACK button
 
 		primaryStage.setMinHeight(500);
 		primaryStage.setMinWidth(500);//sets the dimensions of the stage
@@ -135,6 +138,16 @@ public class Main extends Application {
 
 		primaryStage.setScene(scene1);
 
+	}
+
+	public void setScene(Stage primaryStage, Scene scene){
+
+		primaryStage.setMinHeight(600);
+		primaryStage.setMinWidth(800);//sets the dimensions of the stage
+		primaryStage.setMaxHeight(600);
+		primaryStage.setMaxWidth(800);
+		System.out.println("setScene");
+		primaryStage.setScene(scene);//goes to scene two
 	}
 
 	public void scene2(Stage primaryStage){//onClick of the PLAY button
@@ -146,4 +159,151 @@ public class Main extends Application {
 
 		primaryStage.setScene(scene2);//goes to scene two
 	}
+
+	public Scene getRoom(Stage primaryStage, Scene scene1){
+
+		//randomNumber (not yet called) (no duplicates)
+		Scene randRoom = null;
+		int roomChoice = (int) ((3*Math.random())+1);
+
+		System.out.println(roomChoice);
+
+		while(true){
+				if(roomUsed.size()>0 && roomUsed.contains(roomChoice)){
+					roomChoice = (int) ((3*Math.random())+1);
+					System.out.println("if : "+roomChoice);
+				}else{
+					System.out.println("else");
+					break;
+				}
+		}
+
+
+
+		System.out.println("Before if//else");
+
+		if(roomChoice == 1){
+
+			randRoom = room1(primaryStage, scene1);
+			System.out.println("Room 1");
+			roomUsed.add(roomChoice);
+
+		}else if(roomChoice == 2){
+
+			randRoom = room2(primaryStage, scene1);
+			System.out.println("Room 2");
+			roomUsed.add(roomChoice);
+
+		}else if(roomChoice == 3){
+
+			randRoom = room3(primaryStage, scene1);
+			System.out.println("Room 3");
+			roomUsed.add(roomChoice);
+
+		}
+
+		//based on the random number a room is returned from this method
+		System.out.println("Got here");
+		setScene(primaryStage, randRoom);
+
+		return randRoom;
+
+	}
+
+	private Scene room1(Stage primaryStage, Scene scene1){
+
+		Scene room1;
+
+		BorderPane root = new BorderPane();//for scene 1
+		room1 = new Scene(root,500,500);//creating scene1
+
+		HBox titleBox = new HBox();//creating the Scene Title
+		titleBox.setBackground(new Background(new BackgroundFill(Color.web("0x8BD9D5",0.25), new CornerRadii(0), new Insets(0,0,0,0))));//setting the background of the box
+		Text sceneTitle = new Text("Room 1");
+		sceneTitle.setFont(Font.font("Arial", FontWeight.BOLD, 30));//creating text and adding font, weight and size
+		titleBox.getChildren().addAll(sceneTitle);//adding the text to the HBox
+		titleBox.setAlignment(Pos.TOP_CENTER);
+		titleBox.setPadding(new Insets(25,25,25,25));
+
+
+		Button back = new Button("PAUSE");//creating a new button
+		back.setOnAction(e -> scene1(primaryStage, scene1));
+		back.setMinWidth(50);//setting values
+		back.setMinHeight(50);
+		back.setBackground(new Background(new BackgroundFill(Color.web("0xFFFF00"), new CornerRadii(0), new Insets(10,10,10,10))));
+
+		root.setTop(titleBox);
+		root.setBottom(back);
+
+		return room1;
+
+		//compiles the scene that the room will be
+	}
+
+
+	private Scene room2(Stage primaryStage, Scene scene1){
+
+		Scene room2;
+
+		//compiles the scene that the room will be
+
+		BorderPane root = new BorderPane();//for scene 1
+		room2 = new Scene(root,500,500);//creating scene1
+
+		HBox titleBox = new HBox();//creating the Scene Title
+		titleBox.setBackground(new Background(new BackgroundFill(Color.web("0x8BD9D5",0.25), new CornerRadii(0), new Insets(0,0,0,0))));//setting the background of the box
+		Text sceneTitle = new Text("Room 1");
+		sceneTitle.setFont(Font.font("Arial", FontWeight.BOLD, 30));//creating text and adding font, weight and size
+		titleBox.getChildren().addAll(sceneTitle);//adding the text to the HBox
+		titleBox.setAlignment(Pos.TOP_CENTER);
+		titleBox.setPadding(new Insets(25,25,25,25));
+
+		Button back = new Button("PAUSE");//creating a new button
+		back.setOnAction(e -> scene1(primaryStage, scene1));
+		back.setMinWidth(50);//setting values
+		back.setMinHeight(50);
+		back.setBackground(new Background(new BackgroundFill(Color.web("0xFFFF00"), new CornerRadii(0), new Insets(10,10,10,10))));
+
+		return room2;
+
+	}
+
+	private Scene room3(Stage primaryStage, Scene scene1){
+
+		Scene room3;
+
+		//compiles the scene that the room will be
+
+		BorderPane root = new BorderPane();//for scene 1
+		room3 = new Scene(root,500,500);//creating scene1
+
+		HBox titleBox = new HBox();//creating the Scene Title
+		titleBox.setBackground(new Background(new BackgroundFill(Color.web("0x8BD9D5",0.25), new CornerRadii(0), new Insets(0,0,0,0))));//setting the background of the box
+		Text sceneTitle = new Text("Room 1");
+		sceneTitle.setFont(Font.font("Arial", FontWeight.BOLD, 30));//creating text and adding font, weight and size
+		titleBox.getChildren().addAll(sceneTitle);//adding the text to the HBox
+		titleBox.setAlignment(Pos.TOP_CENTER);
+		titleBox.setPadding(new Insets(25,25,25,25));
+
+		Button back = new Button("PAUSE");//creating a new button
+		back.setOnAction(e -> scene1(primaryStage, scene1));
+		back.setMinWidth(50);//setting values
+		back.setMinHeight(50);
+		back.setBackground(new Background(new BackgroundFill(Color.web("0xFFFF00"), new CornerRadii(0), new Insets(10,10,10,10))));
+
+		return room3;
+
+	}
+
+	public static void scene1(Stage primaryStage, Scene scene1){//onClick of the BACK button
+
+		primaryStage.setMinHeight(500);
+		primaryStage.setMinWidth(500);//sets the dimensions of the stage
+		primaryStage.setMaxHeight(500);
+		primaryStage.setMaxWidth(500);
+
+		primaryStage.setScene(scene1);
+
+	}
+
 }
