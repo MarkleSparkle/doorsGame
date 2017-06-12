@@ -98,7 +98,7 @@ public class Main extends Application {
 		    Text category = new Text(""+name+"Jimmy");
 		    category.setFont(Font.font("Arial", FontWeight.BOLD, 20));
 		    displayMenu.add(category, 1, 0);
-		    
+
 	        File file = new File("bin/application/content/pause2.png");
 	        Image image = new Image(file.toURI().toString());
 	        ImageView imageView = new ImageView();
@@ -106,11 +106,11 @@ public class Main extends Application {
 		    // Pause icon in column 6, row 0
 		    displayMenu.add(imageView, 5 , 0);
 
-		    Button button = new Button("Button");
-		    button.setOnAction(e -> Board.getRoom(primaryStage, scene1));
+/*		    Button button = new Button("Button");
+		    button.setOnAction(e -> Board.getRoom(primaryStage, scene1));*/
 
 			root2.setTop(displayMenu);
-			root2.setCenter(button);
+//			root2.setCenter(button);
 			/************************** Compiling Program **************************/
 
 			primaryStage.setScene(scene1);
