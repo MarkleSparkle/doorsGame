@@ -103,7 +103,7 @@ public class Main extends Application {
 			displayMenu.add(category, 1, 0);
 
 
-/*			File file = new File("bin/application/content/pause2.png");
+			/*			File file = new File("bin/application/content/pause2.png");
 			Image image = new Image(file.toURI().toString());
 			ImageView imageView = new ImageView();
 			imageView.setImage(image);
@@ -169,13 +169,16 @@ public class Main extends Application {
 		System.out.println(roomChoice);
 
 		while(true){
-				if(roomUsed.size()>0 && roomUsed.contains(roomChoice)){
-					roomChoice = (int) ((3*Math.random())+1);
-					System.out.println("if : "+roomChoice);
-				}else{
-					System.out.println("else");
-					break;
-				}
+			if(roomUsed.size()==3){//TODO debug this
+				gameOver(primaryStage);
+			}
+			else if(roomUsed.size()>0 && roomUsed.contains(roomChoice)){
+				roomChoice = (int) ((3*Math.random())+1);
+				System.out.println("if : "+roomChoice);
+			}else{
+				System.out.println("else");
+				break;
+			}
 		}
 
 
@@ -227,7 +230,7 @@ public class Main extends Application {
 
 
 		Button back = new Button("PAUSE");//creating a new button
-		back.setOnAction(e -> scene1(primaryStage, scene1));
+		back.setOnAction(e -> mainMenu(primaryStage, scene1));
 		back.setMinWidth(50);//setting values
 		back.setMinHeight(50);
 		back.setBackground(new Background(new BackgroundFill(Color.web("0xFFFF00"), new CornerRadii(0), new Insets(10,10,10,10))));
@@ -259,7 +262,7 @@ public class Main extends Application {
 		titleBox.setPadding(new Insets(25,25,25,25));
 
 		Button back = new Button("PAUSE");//creating a new button
-		back.setOnAction(e -> scene1(primaryStage, scene1));
+		back.setOnAction(e -> mainMenu(primaryStage, scene1));
 		back.setMinWidth(50);//setting values
 		back.setMinHeight(50);
 		back.setBackground(new Background(new BackgroundFill(Color.web("0xFFFF00"), new CornerRadii(0), new Insets(10,10,10,10))));
@@ -289,7 +292,7 @@ public class Main extends Application {
 		titleBox.setPadding(new Insets(25,25,25,25));
 
 		Button back = new Button("PAUSE");//creating a new button
-		back.setOnAction(e -> scene1(primaryStage, scene1));
+		back.setOnAction(e -> mainMenu(primaryStage, scene1));
 		back.setMinWidth(50);//setting values
 		back.setMinHeight(50);
 		back.setBackground(new Background(new BackgroundFill(Color.web("0xFFFF00"), new CornerRadii(0), new Insets(10,10,10,10))));
@@ -301,7 +304,24 @@ public class Main extends Application {
 
 	}
 
-	public static void scene1(Stage primaryStage, Scene scene1){//onClick of the BACK button
+	public static void gameOver(Stage primaryStage){//after the game is complete
+
+		Scene scene;
+		primaryStage.setMinHeight(500);
+		primaryStage.setMinWidth(500);//sets the dimensions of the stage
+		primaryStage.setMaxHeight(500);
+		primaryStage.setMaxWidth(500);
+
+		BorderPane root = new BorderPane();//for scene 1
+		scene = new Scene(root,500,500);//creating scene1
+
+		primaryStage.setScene(scene);
+
+		//TODO create game over scene and set the scene
+
+	}
+
+	public static void mainMenu(Stage primaryStage, Scene scene1){//onClick of the BACK button
 
 		primaryStage.setMinHeight(500);
 		primaryStage.setMinWidth(500);//sets the dimensions of the stage
