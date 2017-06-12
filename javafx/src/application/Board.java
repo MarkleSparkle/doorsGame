@@ -15,6 +15,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class Board {
 	/*
@@ -28,26 +29,28 @@ public class Board {
 
 	 private static ArrayList<Integer> roomUsed =new ArrayList<Integer>();
 
-	public static Scene getRoom(){
+	public static Scene getRoom(Stage primaryStage, Scene scene1){
 
 		//randomNumber (not yet called) (no duplicates)
 		Scene randRoom = null;
 		int roomChoice = 0;
 
 		while(true){
-
+			if(roomUsed.size()>0){
 			if(roomUsed.contains(roomChoice)){
 
 				roomChoice = (int) Math.random() * 3;
-
-			}else
+				roomChoice=0;
+			}else{
+				System.out.println("else");
 				break;
-
+			}
+			}
 		}
 
 		if(roomChoice == 0){
 
-			randRoom = room1();
+			randRoom = room1(primaryStage, scene1);
 			roomUsed.add(roomChoice);
 
 		}else if(roomChoice == 1){
@@ -69,7 +72,7 @@ public class Board {
 	}
 
 
-	private static Scene room1(){
+	private static Scene room1(Stage primaryStage, Scene scene1){
 
 		Scene room1;
 
@@ -85,6 +88,7 @@ public class Board {
 		titleBox.setPadding(new Insets(25,25,25,25));
 
 		Button back = new Button("PAUSE");//creating a new button
+		back.setOnAction(e -> scene1(primaryStage, scene1));
 		back.setMinWidth(50);//setting values
 		back.setMinHeight(50);
 		back.setBackground(new Background(new BackgroundFill(Color.web("0xFFFF00"), new CornerRadii(0), new Insets(10,10,10,10))));
@@ -95,6 +99,7 @@ public class Board {
 
 		return null;
 	}
+
 
 	private static Scene room2(){
 
@@ -114,6 +119,17 @@ public class Board {
 
 
 		return null;
+	}
+
+	public static void scene1(Stage primaryStage, Scene scene1){//onClick of the BACK button
+
+		primaryStage.setMinHeight(500);
+		primaryStage.setMinWidth(500);//sets the dimensions of the stage
+		primaryStage.setMaxHeight(500);
+		primaryStage.setMaxWidth(500);
+
+		primaryStage.setScene(scene1);
+
 	}
 
 
