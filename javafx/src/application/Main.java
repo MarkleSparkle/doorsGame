@@ -99,6 +99,7 @@ public class Main extends Application {
 		    category.setFont(Font.font("Arial", FontWeight.BOLD, 20));
 		    displayMenu.add(category, 1, 0);
 
+
 	        File file = new File("bin/application/content/pause2.png");
 	        Image image = new Image(file.toURI().toString());
 	        ImageView imageView = new ImageView();
