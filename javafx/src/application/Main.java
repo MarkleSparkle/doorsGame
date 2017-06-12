@@ -7,6 +7,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
@@ -253,22 +254,27 @@ public class Main extends Application {
 		BorderPane root = new BorderPane();//for scene 1
 		room2 = new Scene(root,500,500);//creating scene1
 
-		HBox titleBox = new HBox();//creating the Scene Title
-		titleBox.setBackground(new Background(new BackgroundFill(Color.web("0x8BD9D5",0.25), new CornerRadii(0), new Insets(0,0,0,0))));//setting the background of the box
-		Text sceneTitle = new Text("Room 2");
-		sceneTitle.setFont(Font.font("Arial", FontWeight.BOLD, 30));//creating text and adding font, weight and size
-		titleBox.getChildren().addAll(sceneTitle);//adding the text to the HBox
-		titleBox.setAlignment(Pos.TOP_CENTER);
-		titleBox.setPadding(new Insets(25,25,25,25));
+		Label l = new Label("Hey");
 
-		Button back = new Button("PAUSE");//creating a new button
-		back.setOnAction(e -> mainMenu(primaryStage, scene1));
-		back.setMinWidth(50);//setting values
-		back.setMinHeight(50);
-		back.setBackground(new Background(new BackgroundFill(Color.web("0xFFFF00"), new CornerRadii(0), new Insets(10,10,10,10))));
+		HBox h = new HBox();
+		h.getChildren().add(l);
+		h.setBackground(new Background(new BackgroundFill(Color.ALICEBLUE, null, new Insets(10,0,10,0))));
+		VBox v = new VBox();
+		v.getChildren().add(l);
+		v.setBackground(new Background(new BackgroundFill(Color.ALICEBLUE, null , new Insets(0,10,0,10))));
+		GridPane gp = new GridPane();
 
-		root.setTop(titleBox);
-		root.setBottom(back);
+		for(int i=0; i<12; i++){
+			for(int j=0; j<35; j++){
+				gp.add(new Button("Click ME"), i, j);
+			}
+		}
+
+/*		root.setLeft(v);
+		root.setRight(v);
+		root.setTop(h);
+		root.setBottom(h);*/
+		root.setCenter(gp);
 
 		return room2;
 
