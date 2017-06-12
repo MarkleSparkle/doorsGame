@@ -103,12 +103,12 @@ public class Main extends Application {
 			displayMenu.add(category, 1, 0);
 
 
-			File file = new File("bin/application/content/pause2.png");
+/*			File file = new File("bin/application/content/pause2.png");
 			Image image = new Image(file.toURI().toString());
 			ImageView imageView = new ImageView();
 			imageView.setImage(image);
 			// Pause icon in column 6, row 0
-			displayMenu.add(imageView, 5 , 0);
+			displayMenu.add(imageView, 5 , 0);*/
 
 			Button button = new Button("Button");
 			button.setOnAction(e -> getRoom(primaryStage, scene1));
@@ -252,7 +252,7 @@ public class Main extends Application {
 
 		HBox titleBox = new HBox();//creating the Scene Title
 		titleBox.setBackground(new Background(new BackgroundFill(Color.web("0x8BD9D5",0.25), new CornerRadii(0), new Insets(0,0,0,0))));//setting the background of the box
-		Text sceneTitle = new Text("Room 1");
+		Text sceneTitle = new Text("Room 2");
 		sceneTitle.setFont(Font.font("Arial", FontWeight.BOLD, 30));//creating text and adding font, weight and size
 		titleBox.getChildren().addAll(sceneTitle);//adding the text to the HBox
 		titleBox.setAlignment(Pos.TOP_CENTER);
@@ -263,6 +263,9 @@ public class Main extends Application {
 		back.setMinWidth(50);//setting values
 		back.setMinHeight(50);
 		back.setBackground(new Background(new BackgroundFill(Color.web("0xFFFF00"), new CornerRadii(0), new Insets(10,10,10,10))));
+
+		root.setTop(titleBox);
+		root.setBottom(back);
 
 		return room2;
 
@@ -279,7 +282,7 @@ public class Main extends Application {
 
 		HBox titleBox = new HBox();//creating the Scene Title
 		titleBox.setBackground(new Background(new BackgroundFill(Color.web("0x8BD9D5",0.25), new CornerRadii(0), new Insets(0,0,0,0))));//setting the background of the box
-		Text sceneTitle = new Text("Room 1");
+		Text sceneTitle = new Text("Room 3");
 		sceneTitle.setFont(Font.font("Arial", FontWeight.BOLD, 30));//creating text and adding font, weight and size
 		titleBox.getChildren().addAll(sceneTitle);//adding the text to the HBox
 		titleBox.setAlignment(Pos.TOP_CENTER);
@@ -290,6 +293,9 @@ public class Main extends Application {
 		back.setMinWidth(50);//setting values
 		back.setMinHeight(50);
 		back.setBackground(new Background(new BackgroundFill(Color.web("0xFFFF00"), new CornerRadii(0), new Insets(10,10,10,10))));
+
+		root.setTop(titleBox);
+		root.setBottom(back);
 
 		return room3;
 
