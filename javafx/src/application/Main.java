@@ -98,11 +98,7 @@ public class Main extends Application {
 		    Text category = new Text(""+name+"Jimmy");
 		    category.setFont(Font.font("Arial", FontWeight.BOLD, 20));
 		    displayMenu.add(category, 1, 0);
-<<<<<<< HEAD
 
-=======
-		    
->>>>>>> branch 'master' of https://github.com/MarkleSparkle/doorsGame.git
 	        File file = new File("bin/application/content/pause2.png");
 	        Image image = new Image(file.toURI().toString());
 	        ImageView imageView = new ImageView();
