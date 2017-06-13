@@ -1,18 +1,43 @@
 package application;
 
 import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import java.io.File;
+import javafx.scene.media.AudioClip;
+
+AudioClip tone1 = new AudioClip();
+AudioClip tone2 = new AudioClip();
+AudioClip tone3 = new AudioClip();
 
 public class ToneDoor {
 	
 	public ToneDoor(){
 		
-		String ssound = "sound.mp3";
-	    Media sound = new Media(ssound);
-	    MediaPlayer mediaPlayer = new MediaPlayer(sound);
-	    mediaPlayer.play();
+		
 		
 	}
-
+	
+	public static void playTone(int toneNumber){
+		
+		if(toneNumber == 0){
+			
+			tone1.play();
+		
+		}else if(toneNumber == 1){
+			
+			tone2.play();
+			
+		}else if(toneNumber == 2){
+			
+			tone3.play();
+			
+		}
+		
+	}
+	
+	public static void toneGen(){
+	
+		
+		
+	}
+	
 }
