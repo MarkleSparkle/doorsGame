@@ -73,6 +73,10 @@ public class Main extends Application {
 			//play.hoverProperty();//TODO look at this!
 			play.setMinWidth(300);//setting values
 			play.setMinHeight(50);
+			play.setOnMouseEntered(e -> play.setBackground(new Background(new BackgroundFill(Color.web("0xAFDEDB",1), new CornerRadii(30), new Insets(0,0,0,0)))));//background of button);
+			play.setOnMouseExited(e -> play.setBackground(new Background(new BackgroundFill(Color.web("0x8BD9D5",1), new CornerRadii(25), new Insets(0,0,0,0)))));//background of button);
+			play.setOnMousePressed(e -> play.setMinSize(250, 42));
+			play.setOnMouseReleased(e -> play.setMinSize(300,50));
 			play.setOnAction(e -> scene2(primaryStage));
 
 			VBox vbox = new VBox();//creating a VBox for the buttons
