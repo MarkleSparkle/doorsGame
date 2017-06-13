@@ -188,7 +188,7 @@ public class Main extends Application {
 
 		if(roomChoice == 1){
 
-			randRoom = room1(primaryStage, scene1);
+			randRoom = room1(primaryStage, scene1, 0);
 			System.out.println("Room 1");
 			roomUsed.add(roomChoice);
 
@@ -214,7 +214,7 @@ public class Main extends Application {
 
 	}
 
-	private Scene room1(Stage primaryStage, Scene scene1){
+	private Scene room1(Stage primaryStage, Scene scene1, int roomState){
 
 		Scene room1;
 
@@ -223,12 +223,11 @@ public class Main extends Application {
 
 		HBox titleBox = new HBox();//creating the Scene Title
 		titleBox.setBackground(new Background(new BackgroundFill(Color.web("0x8BD9D5",0.25), new CornerRadii(0), new Insets(0,0,0,0))));//setting the background of the box
-		Text sceneTitle = new Text("Room 1");
+		Text sceneTitle = new Text("TONES");
 		sceneTitle.setFont(Font.font("Arial", FontWeight.BOLD, 30));//creating text and adding font, weight and size
 		titleBox.getChildren().addAll(sceneTitle);//adding the text to the HBox
 		titleBox.setAlignment(Pos.TOP_CENTER);
 		titleBox.setPadding(new Insets(25,25,25,25));
-
 
 		Button back = new Button("PAUSE");//creating a new button
 		back.setOnAction(e -> mainMenu(primaryStage, scene1));
@@ -236,7 +235,38 @@ public class Main extends Application {
 		back.setMinHeight(50);
 		back.setBackground(new Background(new BackgroundFill(Color.web("0xFFFF00"), new CornerRadii(0), new Insets(10,10,10,10))));
 
+		Button A = new Button("A");//creating a new button
+		A.setOnAction(e -> ToneDoor.playTone(2));
+		A.setMinWidth(300);//setting values
+		A.setMinHeight(300);
+
+		if(roomState == 1){
+
+			A.setBackground(new Background(new BackgroundFill(Color.web("0x00FF00"), new CornerRadii(0), new Insets(10,10,10,10))));
+
+		}else{
+
+			A.setBackground(new Background(new BackgroundFill(Color.web("0x00FF00"), new CornerRadii(0), new Insets(10,10,10,10))));
+
+
+		}
+
+		Button D = new Button("D");//creating a new button
+		D.setOnAction(e -> ToneDoor.playTone(0));
+		D.setMinWidth(300);//setting values
+		D.setMinHeight(300);
+		D.setBackground(new Background(new BackgroundFill(Color.web("0xFF0000"), new CornerRadii(0), new Insets(10,10,10,10))));
+
+		Button G = new Button("G");//creating a new button
+		G.setOnAction(e -> ToneDoor.playTone(1));
+		G.setMinWidth(300);//setting values
+		G.setMinHeight(300);
+		G.setBackground(new Background(new BackgroundFill(Color.web("0x0000FF"), new CornerRadii(0), new Insets(10,10,10,10))));
+
 		root.setTop(titleBox);
+		root.setCenter(A);
+		root.setLeft(G);
+		root.setRight(D);
 		root.setBottom(back);
 
 		return room1;

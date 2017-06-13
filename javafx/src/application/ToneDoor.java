@@ -1,10 +1,6 @@
 package application;
 
-import javafx.scene.media.Media;
-import java.io.File;
 import javafx.scene.media.AudioClip;
-
-
 
 public class ToneDoor {
 
@@ -15,21 +11,46 @@ public class ToneDoor {
 
 	public static void playTone(int toneNumber){
 
-		AudioClip tone1 = new AudioClip("");
-		AudioClip tone2 = new AudioClip("");
-		AudioClip tone3 = new AudioClip("");
+		AudioClip tone1 = new AudioClip(ToneDoor.class.getResource("A.mp3").toExternalForm());
+		AudioClip tone2 = new AudioClip(ToneDoor.class.getResource("G.mp3").toExternalForm());
+		AudioClip tone3 = new AudioClip(ToneDoor.class.getResource("D.mp3").toExternalForm());
 
 		if(toneNumber == 0){
 
-			tone1.play();
+			
+			try {
+				
+				tone1.play();
+				Thread.sleep(1000);
+				tone1.stop();
+				
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 
 		}else if(toneNumber == 1){
 
-			tone2.play();
-
+			try {
+				
+				tone2.play();
+				Thread.sleep(1000);
+				tone2.stop();
+				
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			
 		}else if(toneNumber == 2){
 
-			tone3.play();
+			try {
+				
+				tone3.play();
+				Thread.sleep(1000);
+				tone3.stop();
+				
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 
 		}
 
