@@ -230,10 +230,10 @@ public class Main extends Application {
 		titleBox.setPadding(new Insets(25,25,25,25));
 
 
-		Button back = new Button("PAUSE");//creating a new button
+		Button back = new Button("BACK");//creating a new button
 		back.setOnAction(e -> mainMenu(primaryStage, scene1));
-		back.setMinWidth(50);//setting values
-		back.setMinHeight(50);
+		back.setMinWidth(100);//setting values
+		back.setMinHeight(100);
 		back.setBackground(new Background(new BackgroundFill(Color.web("0xFFFF00"), new CornerRadii(0), new Insets(10,10,10,10))));
 
 		root.setTop(titleBox);
@@ -254,27 +254,31 @@ public class Main extends Application {
 		BorderPane root = new BorderPane();//for scene 1
 		room2 = new Scene(root,500,500);//creating scene1
 
-		Label l = new Label("Hey");
+		GridPane gp = new GridPane();//Creating a GridPane to use for the buttons
 
-		HBox h = new HBox();
-		h.getChildren().add(l);
-		h.setBackground(new Background(new BackgroundFill(Color.ALICEBLUE, null, new Insets(10,0,10,0))));
-		VBox v = new VBox();
-		v.getChildren().add(l);
-		v.setBackground(new Background(new BackgroundFill(Color.ALICEBLUE, null , new Insets(0,10,0,10))));
-		GridPane gp = new GridPane();
+		Button button;
+		int width = (int) (Math.random()*9);//two random integers for the REAL button location
+		int height = (int) (Math.random()*7);
 
-		for(int i=0; i<12; i++){
-			for(int j=0; j<35; j++){
-				gp.add(new Button("Click ME"), i, j);
+		System.out.println("W: "+width+" \\ H: "+height);
+
+		for(int i=0; i<9; i++){//setting the horizontal index of the buttons
+			for(int j=0; j<7; j++){//setting the vertical index of the buttons
+				button = new Button("Click ME");//creates a new button
+				if(i == width && j == height){//if the for statements are at the positions that the REAL button should be placed at
+					System.out.println("Into IF");
+					button.setBackground(new Background(new BackgroundFill(Color.AQUA, null, null)));
+					button.setOnAction(e -> toWaitingRoom(primaryStage, scene1));//sets the action to going to the waiting room
+				}
+				button.setMaxHeight(80);
+				button.setMinHeight(80);	//sets the height and width
+				button.setMinWidth(87);
+				button.setMaxWidth(87);
+				gp.add(button, i, j);//adds the button to the GridPane
 			}
 		}
 
-/*		root.setLeft(v);
-		root.setRight(v);
-		root.setTop(h);
-		root.setBottom(h);*/
-		root.setCenter(gp);
+		root.setCenter(gp);//sets the GridPane to the root
 
 		return room2;
 
@@ -297,16 +301,50 @@ public class Main extends Application {
 		titleBox.setAlignment(Pos.TOP_CENTER);
 		titleBox.setPadding(new Insets(25,25,25,25));
 
-		Button back = new Button("PAUSE");//creating a new button
+		Button back = new Button("BACK");//creating a new button
 		back.setOnAction(e -> mainMenu(primaryStage, scene1));
-		back.setMinWidth(50);//setting values
-		back.setMinHeight(50);
+		back.setMinWidth(100);//setting values
+		back.setMinHeight(100);
 		back.setBackground(new Background(new BackgroundFill(Color.web("0xFFFF00"), new CornerRadii(0), new Insets(10,10,10,10))));
 
 		root.setTop(titleBox);
 		root.setBottom(back);
 
 		return room3;
+
+	}
+
+	public void toWaitingRoom(Stage primaryStage, Scene scene){//goes to the waiting room (between rooms)
+
+		Scene waitingRoom;
+		primaryStage.setTitle("WAITING ROOM...");
+		BorderPane root = new BorderPane();//for scene 1
+		waitingRoom = new Scene(root,500,500);//creating scene1
+		root.setBackground(new Background(new BackgroundFill(Color.ALICEBLUE, new CornerRadii(0), null)));
+
+
+
+		HBox titleBox = new HBox();//creating the Scene Title
+		titleBox.setBackground(new Background(new BackgroundFill(Color.web("0x8BD9D5",0.25), new CornerRadii(0), new Insets(0,0,0,0))));//setting the background of the box
+		titleBox.setPadding(new Insets(15,15,15,15));
+		Text label = new Text("Good Job!");
+		label.setFont(Font.font("Arial", FontWeight.BOLD, 30));
+		titleBox.getChildren().addAll(label);//adding the text to the HBox
+		titleBox.setAlignment(Pos.TOP_CENTER);
+
+		Button goButton = new Button("Next Challenge");
+		goButton.setBackground(new Background(new BackgroundFill(Color.web("0xAD55ED",0.75), new CornerRadii(25), new Insets(0,0,0,0))));//background of button
+		goButton.setMinWidth(300);//setting values
+		goButton.setMinHeight(50);
+
+		goButton.setOnAction(e -> {
+			primaryStage.setTitle("Doors.exe");
+			getRoom(primaryStage, scene);
+		});
+		root.setTop(titleBox);
+		root.setCenter(goButton);
+
+		primaryStage.setScene(waitingRoom);
 
 	}
 
