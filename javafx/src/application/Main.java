@@ -30,6 +30,7 @@ public class Main extends Application {
 	static Scene scene1;//Scene 1 is Menu, Scene 2 is the game
 	Scene scene2;
 	private static ArrayList<Integer> roomUsed =new ArrayList<Integer>();
+	private static ArrayList<Integer> tonePressed = new ArrayList<Integer>();
 
 
 	@Override
@@ -226,6 +227,7 @@ public class Main extends Application {
 		return randRoom;
 
 	}
+
 	private Scene listen(Stage primaryStage, Scene scene1){
 
 		BorderPane root = new BorderPane();
@@ -244,6 +246,7 @@ public class Main extends Application {
 		return scene;
 
 	}
+
 	private Scene room1(Stage primaryStage, Scene scene1, int roomState){
 
 		Scene room1;
@@ -258,15 +261,17 @@ public class Main extends Application {
 		titleBox.getChildren().addAll(sceneTitle);//adding the text to the HBox
 		titleBox.setAlignment(Pos.TOP_CENTER);
 		titleBox.setPadding(new Insets(25,25,25,25));
-
-		Button back = new Button("BACK");//creating a new button
-		back.setOnAction(e -> mainMenu(primaryStage));
-		back.setMinWidth(100);//setting values
-		back.setMinHeight(100);
-		back.setBackground(new Background(new BackgroundFill(Color.web("0xFFFF00"), new CornerRadii(0), new Insets(10,10,10,10))));
+//
+//		Button back = new Button("BACK");//creating a new button
+//		back.setOnAction(e -> mainMenu(primaryStage));
+//		back.setMinWidth(100);//setting values
+//		back.setMinHeight(100);
+//		back.setBackground(new Background(new BackgroundFill(Color.web("0xFFFF00"), new CornerRadii(0), new Insets(10,10,10,10))));
 
 		Button A = new Button("A");//creating a new button
-		A.setOnAction(e -> ToneDoor.playTone(2));
+		A.setOnAction(e -> ToneDoor.playTone(0));
+		A.setOnAction(e-> tonePressed.add(1));
+		A.setOnAction(e-> interTone(primaryStage));
 		A.setMinWidth(200);//setting values
 		A.setMinHeight(200);
 
@@ -281,7 +286,9 @@ public class Main extends Application {
 		}
 
 		Button D = new Button("D");//creating a new button
-		D.setOnAction(e -> ToneDoor.playTone(0));
+		D.setOnAction(e -> ToneDoor.playTone(2));
+		D.setOnAction(e-> tonePressed.add(3));
+		D.setOnAction(e-> interTone(primaryStage));
 		D.setMinWidth(200);//setting values
 		D.setMinHeight(200);
 
@@ -297,6 +304,8 @@ public class Main extends Application {
 
 		Button G = new Button("G");//creating a new button
 		G.setOnAction(e -> ToneDoor.playTone(1));
+		G.setOnAction(e-> tonePressed.add(2));
+		G.setOnAction(e-> interTone(primaryStage));
 		G.setMinWidth(200);//setting values
 		G.setMinHeight(200);
 
@@ -317,7 +326,6 @@ public class Main extends Application {
 			for(int a = 0; a < 3; a++){
 
 				if(order[a] == 1){
-
 
 					setScene(primaryStage, room1(primaryStage, scene1, 1));
 
@@ -369,7 +377,6 @@ public class Main extends Application {
 		root.setCenter(A);
 		root.setLeft(G);
 		root.setRight(D);
-		root.setBottom(back);
 
 		return room1;
 
@@ -558,6 +565,25 @@ public class Main extends Application {
 		primaryStage.setMaxWidth(500);
 
 		primaryStage.setScene(scene1);
+
+	}
+
+	public void interTone(Stage primaryStage){
+
+		if(tonePressed.size() == 3){
+
+			if(ToneDoor.toneCheck(tonePressed.get(0), tonePressed.get(1), tonePressed.get(2))){
+
+				toWaitingRoom(primaryStage, scene1);
+
+			}else{
+
+
+				tonePressed.clear();
+
+			}
+
+		}
 
 	}
 
