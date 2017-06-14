@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
@@ -107,22 +108,12 @@ public class Main extends Application {
 			category.setFont(Font.font("Arial", FontWeight.BOLD, 20));
 			displayMenu.add(category, 1, 0);
 
-<<<<<<< HEAD
-	        File file = new File("bin/application/content/pause2.png");
-	        Image image = new Image(file.toURI().toString());
-	        ImageView imageView = new ImageView();
-	        imageView.setImage(image);
-		    // Pause icon in column 6, row 0
-		    displayMenu.add(imageView, 5 , 0);
-=======
-
 			/*			File file = new File("bin/application/content/pause2.png");
 			Image image = new Image(file.toURI().toString());
 			ImageView imageView = new ImageView();
 			imageView.setImage(image);
 			// Pause icon in column 6, row 0
 			displayMenu.add(imageView, 5 , 0);*/
->>>>>>> branch 'master' of https://github.com/MarkleSparkle/doorsGame.git
 
 			Button button = new Button("Button");
 			button.setOnAction(e -> getRoom(primaryStage, scene1));
@@ -326,35 +317,48 @@ public class Main extends Application {
 		return room2;
 
 	}
-
 	private Scene room3(Stage primaryStage, Scene scene1){
 
 		Scene room3;
-
+		String[] words = new String[]{
+				"cacophony","dichotomy","epitome","euphemism","gregarious","idiosyncratic","infinitesimal","narcissist","ostentatious","perfunctory","quintessential"
+		};
 		//compiles the scene that the room will be
 
 		BorderPane root = new BorderPane();//for scene 1
 		room3 = new Scene(root,500,500);//creating scene1
 
-		HBox titleBox = new HBox();//creating the Scene Title
-		titleBox.setBackground(new Background(new BackgroundFill(Color.web("0x8BD9D5",0.25), new CornerRadii(0), new Insets(0,0,0,0))));//setting the background of the box
-		Text sceneTitle = new Text("Room 3");
-		sceneTitle.setFont(Font.font("Arial", FontWeight.BOLD, 30));//creating text and adding font, weight and size
-		titleBox.getChildren().addAll(sceneTitle);//adding the text to the HBox
-		titleBox.setAlignment(Pos.TOP_CENTER);
-		titleBox.setPadding(new Insets(25,25,25,25));
+		HBox titleBox = new HBox();//the box holding the title and the random word
+		Text text = new Text("Input the word: ");//title
+		Text word = new Text();//text for the random word
+		text.setFont(Font.font("Arial", FontWeight.BOLD, 30));//setting font
+		word.setFont(Font.font("Arial", FontWeight.BOLD, 30));
+		String selection;//var to keep the selection word
+		word.setText(selection = words[(int) (Math.random()*words.length)]);//selecting the word and setting the variable
+		titleBox.getChildren().addAll(text,word);//adding elements to the box
+		titleBox.setAlignment(Pos.CENTER);//setting it all to center alignement
+		
+		HBox hbox = new HBox();
+		TextField textField = new TextField();//new textfield
+		Button submit = new Button("Submit");//new button
+		submit.setOnAction(e -> {//setting the button to set check the spelling of the input (matching in up to the selected word)
+			toVariable(textField.getText());
+			if(textField.getText().equals(selection))toWaitingRoom(primaryStage, scene1);
+		});
+		hbox.getChildren().addAll(textField,submit);//adding the field and button elements to a box
+		hbox.setAlignment(Pos.CENTER);//setting the alignment
+		
+		root.setTop(titleBox);//title and word
+		root.setCenter(hbox);//field and box
 
-		Button back = new Button("BACK");//creating a new button
-		back.setOnAction(e -> mainMenu(primaryStage, scene1));
-		back.setMinWidth(100);//setting values
-		back.setMinHeight(100);
-		back.setBackground(new Background(new BackgroundFill(Color.web("0xFFFF00"), new CornerRadii(0), new Insets(10,10,10,10))));
+		return room3;//returning the completed word
 
-		root.setTop(titleBox);
-		root.setBottom(back);
+	}
 
-		return room3;
+	static String input;
 
+	public void toVariable(String string){//takes the input and assigns it to the static input variable
+		input = string;
 	}
 
 	public void toWaitingRoom(Stage primaryStage, Scene scene){//goes to the waiting room (between rooms)
