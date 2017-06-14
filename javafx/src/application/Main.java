@@ -201,7 +201,7 @@ public class Main extends Application {
 		}
 		else if(roomChoice == 1){
 
-			randRoom = room1(primaryStage, scene1, 0);
+			randRoom = listen(primaryStage, scene1);
 			System.out.println("Room 1");
 			roomUsed.add(roomChoice);
 
@@ -226,7 +226,24 @@ public class Main extends Application {
 		return randRoom;
 
 	}
+	private Scene listen(Stage primaryStage, Scene scene1){
 
+		BorderPane root = new BorderPane();
+		Scene scene = new Scene(root, 500, 500);
+
+		Text text = new Text("Listen Closely");
+
+		Button button = new Button("Play Sound");
+		button.setBackground(new Background(new BackgroundFill(Color.web("0xAD55ED",0.25), new CornerRadii(0), new Insets(0,0,0,0))));//setting the background of the box
+		button.setPadding(new Insets(15,15,15,15));
+		button.setOnAction(e -> room1(primaryStage, scene1, 0));
+
+		root.setTop(text);
+		root.setCenter(button);
+
+		return scene;
+
+	}
 	private Scene room1(Stage primaryStage, Scene scene1, int roomState){
 
 		Scene room1;
@@ -277,12 +294,12 @@ public class Main extends Application {
 			D.setBackground(new Background(new BackgroundFill(Color.web("0xFF0000"), new CornerRadii(0), new Insets(10,10,10,10))));
 
 		}
-		
+
 		Button G = new Button("G");//creating a new button
 		G.setOnAction(e -> ToneDoor.playTone(1));
 		G.setMinWidth(200);//setting values
 		G.setMinHeight(200);
-		
+
 		if(roomState == 3){
 
 			A.setBackground(new Background(new BackgroundFill(Color.web("0x0009FF"), new CornerRadii(0), new Insets(10,10,10,10))));
@@ -292,63 +309,62 @@ public class Main extends Application {
 			A.setBackground(new Background(new BackgroundFill(Color.web("0x0000FF"), new CornerRadii(0), new Insets(10,10,10,10))));
 
 		}
-		
+
 		if(roomState == 0){
-			
+
 			int[] order = ToneDoor.toneGen();
-		
+
 			for(int a = 0; a < 3; a++){
-			
+
 				if(order[a] == 1){
-					
-					setScene(primaryStage, room1(primaryStage, scene1, -1));					
+
+
 					setScene(primaryStage, room1(primaryStage, scene1, 1));
-					
+
 					ToneDoor.playTone(0);
-					
+
 					try {
 						Thread.sleep(1000);
 					} catch (InterruptedException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-				
+
 				}else if(order[a] == 2){
-					
-					setScene(primaryStage, room1(primaryStage, scene1, -1));
-					setScene(primaryStage, room1(primaryStage, scene1, 2));			
-					
+
+
+					setScene(primaryStage, room1(primaryStage, scene1, 2));
+
 					ToneDoor.playTone(1);
-					
+
 					try {
 						Thread.sleep(1000);
 					} catch (InterruptedException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-				
+
 				}else if(order[a] == 3){
-				
-					setScene(primaryStage, room1(primaryStage, scene1, -1));
+
 					setScene(primaryStage, room1(primaryStage, scene1, 3));
-					
+
 					ToneDoor.playTone(2);
-					
+
 					try {
 						Thread.sleep(1000);
 					} catch (InterruptedException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-				
+
 				}
-			 
-			
-			
+
+
+
 			}
-			
+
 		}
-		
+
 		root.setTop(titleBox);
 		root.setCenter(A);
 		root.setLeft(G);
@@ -368,6 +384,10 @@ public class Main extends Application {
 
 		BorderPane root = new BorderPane();//for scene 1
 		room2 = new Scene(root,500,500);//creating scene1
+		room2.getStylesheets().add(getClass().getResource("application.css").toExternalForm());//getting the style sheet for scene1
+
+		root.setId("pane");
+
 
 		GridPane gp = new GridPane();//Creating a GridPane to use for the buttons
 
@@ -398,7 +418,7 @@ public class Main extends Application {
 		return room2;
 
 	}
-	
+
 	private Scene room3(Stage primaryStage, Scene scene1){
 
 		Scene room3;

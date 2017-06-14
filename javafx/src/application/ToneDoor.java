@@ -59,9 +59,9 @@ public class ToneDoor {
 
 		int[] toneOrder = new int[3];
 		
-		toneOrder[0] = (int) Math.random() * 2 + 1;
-		toneOrder[1] = (int) Math.random() * 2 + 1;
-		toneOrder[2] = (int) Math.random() * 2 + 1;
+		toneOrder[0] = (int) ((Math.random() * 3) + 1);
+		toneOrder[1] = (int) ((Math.random() * 3) + 1);
+		toneOrder[2] = (int) ((Math.random() * 3) + 1);
 		
 		return toneOrder;
 
