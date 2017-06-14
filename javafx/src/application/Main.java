@@ -27,7 +27,8 @@ import javafx.geometry.Pos;
 
 public class Main extends Application {
 
-	Scene scene1, scene2;//Scene 1 is Menu, Scene 2 is the game
+	static Scene scene1;//Scene 1 is Menu, Scene 2 is the game
+	Scene scene2;
 	private static ArrayList<Integer> roomUsed =new ArrayList<Integer>();
 
 
@@ -78,7 +79,7 @@ public class Main extends Application {
 			play.setOnMouseExited(e -> play.setBackground(new Background(new BackgroundFill(Color.web("0x8BD9D5",1), new CornerRadii(25), new Insets(0,0,0,0)))));//background of button);
 			play.setOnMousePressed(e -> play.setMinSize(250, 42));
 			play.setOnMouseReleased(e -> play.setMinSize(300,50));
-			play.setOnAction(e -> scene2(primaryStage));
+			play.setOnAction(e -> getRoom(primaryStage,scene1));
 
 			VBox vbox = new VBox();//creating a VBox for the buttons
 			vbox.setAlignment(Pos.CENTER);//alignment
@@ -165,17 +166,22 @@ public class Main extends Application {
 		primaryStage.setScene(scene2);//goes to scene two
 	}
 
-	public Scene getRoom(Stage primaryStage, Scene scene1){
+	static int counter = 0;
 
+	public Scene getRoom(Stage primaryStage, Scene scene1){
+		counter++;
 		//randomNumber (not yet called) (no duplicates)
 		Scene randRoom = null;
 		int roomChoice = (int) ((3*Math.random())+1);
 
 		System.out.println(roomChoice);
-
+		boolean gameOver=false;
 		while(true){
-			if(roomUsed.size()==3){//TODO debug this
-				gameOver(primaryStage);
+			if(counter>3){//if the game has run out of rooms
+				System.out.println("Game Over Function");
+				gameOver=true;
+				scene1 = gameOver(primaryStage);
+				break;
 			}
 			else if(roomUsed.size()>0 && roomUsed.contains(roomChoice)){
 				roomChoice = (int) ((3*Math.random())+1);
@@ -190,7 +196,10 @@ public class Main extends Application {
 
 		System.out.println("Before if//else");
 
-		if(roomChoice == 1){
+		if(gameOver){
+			randRoom=scene1;
+		}
+		else if(roomChoice == 1){
 
 			randRoom = room1(primaryStage, scene1, 0);
 			System.out.println("Room 1");
@@ -234,7 +243,7 @@ public class Main extends Application {
 		titleBox.setPadding(new Insets(25,25,25,25));
 
 		Button back = new Button("BACK");//creating a new button
-		back.setOnAction(e -> mainMenu(primaryStage, scene1));
+		back.setOnAction(e -> mainMenu(primaryStage));
 		back.setMinWidth(100);//setting values
 		back.setMinHeight(100);
 		back.setBackground(new Background(new BackgroundFill(Color.web("0xFFFF00"), new CornerRadii(0), new Insets(10,10,10,10))));
@@ -410,7 +419,7 @@ public class Main extends Application {
 		word.setText(selection = words[(int) (Math.random()*words.length)]);//selecting the word and setting the variable
 		titleBox.getChildren().addAll(text,word);//adding elements to the box
 		titleBox.setAlignment(Pos.CENTER);//setting it all to center alignement
-		
+
 		HBox hbox = new HBox();
 		TextField textField = new TextField();//new textfield
 		Button submit = new Button("Submit");//new button
@@ -420,7 +429,7 @@ public class Main extends Application {
 		});
 		hbox.getChildren().addAll(textField,submit);//adding the field and button elements to a box
 		hbox.setAlignment(Pos.CENTER);//setting the alignment
-		
+
 		root.setTop(titleBox);//title and word
 		root.setCenter(hbox);//field and box
 
@@ -443,7 +452,6 @@ public class Main extends Application {
 		root.setBackground(new Background(new BackgroundFill(Color.ALICEBLUE, new CornerRadii(0), null)));
 
 
-
 		HBox titleBox = new HBox();//creating the Scene Title
 		titleBox.setBackground(new Background(new BackgroundFill(Color.web("0x8BD9D5",0.25), new CornerRadii(0), new Insets(0,0,0,0))));//setting the background of the box
 		titleBox.setPadding(new Insets(15,15,15,15));
@@ -459,33 +467,70 @@ public class Main extends Application {
 
 		goButton.setOnAction(e -> {
 			primaryStage.setTitle("Doors.exe");
-			getRoom(primaryStage, scene);
+			getRoom(primaryStage, scene);//goes to main menu
 		});
-		root.setTop(titleBox);
+		root.setTop(titleBox);//setting the stuff
 		root.setCenter(goButton);
 
 		primaryStage.setScene(waitingRoom);
 
 	}
 
-	public static void gameOver(Stage primaryStage){//after the game is complete
+	public Scene gameOver(Stage primaryStage){//after the game is complete
 
 		Scene scene;
 		primaryStage.setMinHeight(500);
 		primaryStage.setMinWidth(500);//sets the dimensions of the stage
 		primaryStage.setMaxHeight(500);
 		primaryStage.setMaxWidth(500);
+		primaryStage.setTitle("GAME OVER");
 
 		BorderPane root = new BorderPane();//for scene 1
 		scene = new Scene(root,500,500);//creating scene1
 
-		primaryStage.setScene(scene);
+
+		HBox titleBox = new HBox();//creating the Scene Title
+		titleBox.setBackground(new Background(new BackgroundFill(Color.web("0x8BD9D5",0.25), new CornerRadii(0), new Insets(0,0,0,0))));//setting the background of the box
+		titleBox.setPadding(new Insets(15,15,15,15));
+		Text label = new Text("Thanks for Playing!");
+		label.setFont(Font.font("Arial", FontWeight.BOLD, 30));
+		titleBox.getChildren().addAll(label);//adding the text to the HBox
+		titleBox.setAlignment(Pos.TOP_CENTER);
+
+		VBox vbox = new VBox();
+
+		Text credits= new Text("Credits\n\n");
+		Text programmers = new Text("Programmers:\n");
+		Text one = new Text("Benjamin MacKay\n");
+		Text two = new Text("Mark Frezell\n\n");
+		credits.setFont(Font.font("Arial", FontWeight.BOLD, 24));
+		programmers.setFont(Font.font("Arial", FontWeight.NORMAL, 20));
+		one.setFont(Font.font("Arial", FontWeight.NORMAL, 18));
+		two.setFont(Font.font("Arial", FontWeight.NORMAL, 18));
+
+
+		Button goButton = new Button("Main Menu");
+		goButton.setBackground(new Background(new BackgroundFill(Color.web("0xAD55ED",0.75), new CornerRadii(25), new Insets(0,0,0,0))));//background of button
+		goButton.setMinWidth(300);//setting values
+		goButton.setMinHeight(50);
+		vbox.setAlignment(Pos.CENTER);
+		vbox.getChildren().addAll(credits, programmers, one, two, goButton);//setting all the elements to the vbox
+
+		goButton.setOnAction(e -> {
+			primaryStage.setTitle("Doors.exe");
+			mainMenu(primaryStage);
+		});
+		root.setTop(titleBox);
+		root.setCenter(vbox);
+
+		return scene;
+//		primaryStage.setScene(scene);
 
 		//TODO create game over scene and set the scene
 
 	}
 
-	public static void mainMenu(Stage primaryStage, Scene scene1){//onClick of the BACK button
+	public void mainMenu(Stage primaryStage){//onClick of the BACK button
 
 		primaryStage.setMinHeight(500);
 		primaryStage.setMinWidth(500);//sets the dimensions of the stage
