@@ -16,7 +16,6 @@ public class ToneDoor {
 		AudioClip tone3 = new AudioClip(ToneDoor.class.getResource("D.mp3").toExternalForm());
 
 		if(toneNumber == 0){
-
 			
 			try {
 				
@@ -56,9 +55,15 @@ public class ToneDoor {
 
 	}
 
-	public static void toneGen(){
+	public static int[] toneGen(){
 
-
+		int[] toneOrder = new int[3];
+		
+		toneOrder[0] = (int) Math.random() * 2 + 1;
+		toneOrder[1] = (int) Math.random() * 2 + 1;
+		toneOrder[2] = (int) Math.random() * 2 + 1;
+		
+		return toneOrder;
 
 	}
 

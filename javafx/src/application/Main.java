@@ -241,32 +241,105 @@ public class Main extends Application {
 
 		Button A = new Button("A");//creating a new button
 		A.setOnAction(e -> ToneDoor.playTone(2));
-		A.setMinWidth(300);//setting values
-		A.setMinHeight(300);
+		A.setMinWidth(200);//setting values
+		A.setMinHeight(200);
 
 		if(roomState == 1){
 
-			A.setBackground(new Background(new BackgroundFill(Color.web("0x00FF00"), new CornerRadii(0), new Insets(10,10,10,10))));
+			A.setBackground(new Background(new BackgroundFill(Color.web("0x00FF90"), new CornerRadii(0), new Insets(10,10,10,10))));
 
 		}else{
 
 			A.setBackground(new Background(new BackgroundFill(Color.web("0x00FF00"), new CornerRadii(0), new Insets(10,10,10,10))));
 
-
 		}
 
 		Button D = new Button("D");//creating a new button
 		D.setOnAction(e -> ToneDoor.playTone(0));
-		D.setMinWidth(300);//setting values
-		D.setMinHeight(300);
-		D.setBackground(new Background(new BackgroundFill(Color.web("0xFF0000"), new CornerRadii(0), new Insets(10,10,10,10))));
+		D.setMinWidth(200);//setting values
+		D.setMinHeight(200);
 
+		if(roomState == 2){
+
+			D.setBackground(new Background(new BackgroundFill(Color.web("0xFF9000"), new CornerRadii(0), new Insets(10,10,10,10))));
+
+		}else{
+
+			D.setBackground(new Background(new BackgroundFill(Color.web("0xFF0000"), new CornerRadii(0), new Insets(10,10,10,10))));
+
+		}
+		
 		Button G = new Button("G");//creating a new button
 		G.setOnAction(e -> ToneDoor.playTone(1));
-		G.setMinWidth(300);//setting values
-		G.setMinHeight(300);
-		G.setBackground(new Background(new BackgroundFill(Color.web("0x0000FF"), new CornerRadii(0), new Insets(10,10,10,10))));
+		G.setMinWidth(200);//setting values
+		G.setMinHeight(200);
+		
+		if(roomState == 3){
 
+			A.setBackground(new Background(new BackgroundFill(Color.web("0x0009FF"), new CornerRadii(0), new Insets(10,10,10,10))));
+
+		}else{
+
+			A.setBackground(new Background(new BackgroundFill(Color.web("0x0000FF"), new CornerRadii(0), new Insets(10,10,10,10))));
+
+		}
+		
+		if(roomState == 0){
+			
+			int[] order = ToneDoor.toneGen();
+		
+			for(int a = 0; a < 3; a++){
+			
+				if(order[a] == 1){
+					
+					setScene(primaryStage, room1(primaryStage, scene1, -1));					
+					setScene(primaryStage, room1(primaryStage, scene1, 1));
+					
+					ToneDoor.playTone(0);
+					
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				
+				}else if(order[a] == 2){
+					
+					setScene(primaryStage, room1(primaryStage, scene1, -1));
+					setScene(primaryStage, room1(primaryStage, scene1, 2));			
+					
+					ToneDoor.playTone(1);
+					
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				
+				}else if(order[a] == 3){
+				
+					setScene(primaryStage, room1(primaryStage, scene1, -1));
+					setScene(primaryStage, room1(primaryStage, scene1, 3));
+					
+					ToneDoor.playTone(2);
+					
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				
+				}
+			 
+			
+			
+			}
+			
+		}
+		
 		root.setTop(titleBox);
 		root.setCenter(A);
 		root.setLeft(G);
@@ -277,7 +350,6 @@ public class Main extends Application {
 
 		//compiles the scene that the room will be
 	}
-
 
 	private Scene room2(Stage primaryStage, Scene scene1){
 
@@ -317,6 +389,7 @@ public class Main extends Application {
 		return room2;
 
 	}
+	
 	private Scene room3(Stage primaryStage, Scene scene1){
 
 		Scene room3;
