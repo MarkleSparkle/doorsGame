@@ -233,15 +233,22 @@ public class Main extends Application {
 		BorderPane root = new BorderPane();
 		Scene scene = new Scene(root, 500, 500);
 
+		root.setId("room");
+		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());//getting the style sheet for scene1
+
+
+		VBox vbox = new VBox();
 		Text text = new Text("Listen Closely");
+		text.setFont(Font.font("Arial", FontWeight.BOLD, 35));
 
 		Button button = new Button("Play Sound");
-		button.setBackground(new Background(new BackgroundFill(Color.web("0xAD55ED",0.25), new CornerRadii(0), new Insets(0,0,0,0))));//setting the background of the box
+		button.setBackground(new Background(new BackgroundFill(Color.web("0xAD55ED",0.75), new CornerRadii(0), new Insets(0,0,0,0))));//setting the background of the box
 		button.setPadding(new Insets(15,15,15,15));
 		button.setOnAction(e -> room1(primaryStage, scene1, 0));
+		vbox.setAlignment(Pos.CENTER);
+		vbox.getChildren().addAll(text, button);
 
-		root.setTop(text);
-		root.setCenter(button);
+		root.setCenter(vbox);
 
 		return scene;
 
@@ -253,6 +260,9 @@ public class Main extends Application {
 
 		BorderPane root = new BorderPane();//for scene 1
 		room1 = new Scene(root,500,500);//creating scene1
+		root.setId("room");
+		room1.getStylesheets().add(getClass().getResource("application.css").toExternalForm());//getting the style sheet for scene1
+
 
 		HBox titleBox = new HBox();//creating the Scene Title
 		titleBox.setBackground(new Background(new BackgroundFill(Color.web("0x8BD9D5",0.25), new CornerRadii(0), new Insets(0,0,0,0))));//setting the background of the box
@@ -393,7 +403,7 @@ public class Main extends Application {
 		room2 = new Scene(root,500,500);//creating scene1
 		room2.getStylesheets().add(getClass().getResource("application.css").toExternalForm());//getting the style sheet for scene1
 
-		root.setId("pane");
+		root.setId("room");
 
 
 		GridPane gp = new GridPane();//Creating a GridPane to use for the buttons
@@ -436,6 +446,8 @@ public class Main extends Application {
 
 		BorderPane root = new BorderPane();//for scene 1
 		room3 = new Scene(root,500,500);//creating scene1
+		room3.getStylesheets().add(getClass().getResource("application.css").toExternalForm());//getting the style sheet for scene1
+		root.setId("room");
 
 		HBox titleBox = new HBox();//the box holding the title and the random word
 		Text text = new Text("Input the word: ");//title
@@ -478,6 +490,8 @@ public class Main extends Application {
 		waitingRoom = new Scene(root,500,500);//creating scene1
 		root.setBackground(new Background(new BackgroundFill(Color.ALICEBLUE, new CornerRadii(0), null)));
 
+		root.setId("room");
+		waitingRoom.getStylesheets().add(getClass().getResource("application.css").toExternalForm());//getting the style sheet for scene1
 
 		HBox titleBox = new HBox();//creating the Scene Title
 		titleBox.setBackground(new Background(new BackgroundFill(Color.web("0x8BD9D5",0.25), new CornerRadii(0), new Insets(0,0,0,0))));//setting the background of the box
@@ -515,6 +529,8 @@ public class Main extends Application {
 		BorderPane root = new BorderPane();//for scene 1
 		scene = new Scene(root,500,500);//creating scene1
 
+		root.setId("room");
+		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());//getting the style sheet for scene1
 
 		HBox titleBox = new HBox();//creating the Scene Title
 		titleBox.setBackground(new Background(new BackgroundFill(Color.web("0x8BD9D5",0.25), new CornerRadii(0), new Insets(0,0,0,0))));//setting the background of the box
@@ -530,10 +546,12 @@ public class Main extends Application {
 		Text programmers = new Text("Programmers:\n");
 		Text one = new Text("Benjamin MacKay\n");
 		Text two = new Text("Mark Frezell\n\n");
+		Text images = new Text("FreePix.com & WallpaperSafari.com\n\n");
 		credits.setFont(Font.font("Arial", FontWeight.BOLD, 24));
 		programmers.setFont(Font.font("Arial", FontWeight.NORMAL, 20));
 		one.setFont(Font.font("Arial", FontWeight.NORMAL, 18));
 		two.setFont(Font.font("Arial", FontWeight.NORMAL, 18));
+		images.setFont(Font.font("Arial", FontWeight.NORMAL, 18));
 
 
 		Button goButton = new Button("Main Menu");
@@ -541,7 +559,7 @@ public class Main extends Application {
 		goButton.setMinWidth(300);//setting values
 		goButton.setMinHeight(50);
 		vbox.setAlignment(Pos.CENTER);
-		vbox.getChildren().addAll(credits, programmers, one, two, goButton);//setting all the elements to the vbox
+		vbox.getChildren().addAll(credits, programmers, one, two, images, goButton);//setting all the elements to the vbox
 
 		goButton.setOnAction(e -> {
 			primaryStage.setTitle("Doors.exe");
