@@ -188,7 +188,7 @@ public class Main extends Application {
 			}
 			else if(roomUsed.size()>0 && roomUsed.contains(roomChoice)){
 				roomChoice = (int) ((3*Math.random())+1);
-				System.out.println("if : "+roomChoice);
+				System.out.println("else if : "+roomChoice);
 			}else{
 				System.out.println("else");
 				break;
@@ -238,7 +238,8 @@ public class Main extends Application {
 		root.setId("room");
 		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());//getting the style sheet for scene1
 
-
+		ToneDoor.toneGen();
+		
 		VBox vbox = new VBox();
 		Text text = new Text("Listen Closely");
 		text.setFont(Font.font("Arial", FontWeight.BOLD, 35));
@@ -277,7 +278,7 @@ public class Main extends Application {
 		Button A = new Button("A");//creating a new button
 		A.setOnAction(e -> {
 			ToneDoor.playTone(0);
-			tonePressed.add(1);
+			tonePressed.add(1); //Combined the setOnAction commands
 			interTone(primaryStage);
 		});
 		A.setMinWidth(200);//setting values
@@ -296,7 +297,7 @@ public class Main extends Application {
 		Button D = new Button("D");//creating a new button
 		D.setOnAction(e -> {
 			ToneDoor.playTone(2);
-			tonePressed.add(3);
+			tonePressed.add(3); //Combined the setOnAction commands
 			interTone(primaryStage);
 		});
 		D.setMinWidth(200);//setting values
@@ -315,7 +316,7 @@ public class Main extends Application {
 		Button G = new Button("G");//creating a new button
 		G.setOnAction(e -> {
 			ToneDoor.playTone(1);
-			tonePressed.add(2);
+			tonePressed.add(2);	//Combined the setOnAction commands
 			interTone(primaryStage);
 		});
 		G.setMinWidth(200);//setting values
@@ -521,6 +522,10 @@ public class Main extends Application {
 
 	public Scene gameOver(Stage primaryStage){//after the game is complete
 
+		counter = 0; //resetting the game (can be played again w/out re-launching)
+		roomUsed.clear();//clearing the used rooms variable
+		tonePressed.clear();
+		
 		Scene scene;
 		primaryStage.setMinHeight(500);
 		primaryStage.setMinWidth(500);//sets the dimensions of the stage
@@ -590,7 +595,7 @@ public class Main extends Application {
 
 	public void interTone(Stage primaryStage){
 
-		if(tonePressed.size() == 3){
+		if(tonePressed.size() >= 3){
 
 			if(ToneDoor.toneCheck(tonePressed.get(0), tonePressed.get(1), tonePressed.get(2))){
 
