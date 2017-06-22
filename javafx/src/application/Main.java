@@ -273,17 +273,13 @@ public class Main extends Application {
 		titleBox.getChildren().addAll(sceneTitle);//adding the text to the HBox
 		titleBox.setAlignment(Pos.TOP_CENTER);
 		titleBox.setPadding(new Insets(25,25,25,25));
-//
-//		Button back = new Button("BACK");//creating a new button
-//		back.setOnAction(e -> mainMenu(primaryStage));
-//		back.setMinWidth(100);//setting values
-//		back.setMinHeight(100);
-//		back.setBackground(new Background(new BackgroundFill(Color.web("0xFFFF00"), new CornerRadii(0), new Insets(10,10,10,10))));
 
 		Button A = new Button("A");//creating a new button
-		A.setOnAction(e -> ToneDoor.playTone(0));
-		A.setOnAction(e-> tonePressed.add(1));
-		A.setOnAction(e-> interTone(primaryStage));
+		A.setOnAction(e -> {
+			ToneDoor.playTone(0);
+			tonePressed.add(1);
+			interTone(primaryStage);
+		});
 		A.setMinWidth(200);//setting values
 		A.setMinHeight(200);
 
@@ -298,9 +294,11 @@ public class Main extends Application {
 		}
 
 		Button D = new Button("D");//creating a new button
-		D.setOnAction(e -> ToneDoor.playTone(2));
-		D.setOnAction(e-> tonePressed.add(3));
-		D.setOnAction(e-> interTone(primaryStage));
+		D.setOnAction(e -> {
+			ToneDoor.playTone(2);
+			tonePressed.add(3);
+			interTone(primaryStage);
+		});
 		D.setMinWidth(200);//setting values
 		D.setMinHeight(200);
 
@@ -315,9 +313,11 @@ public class Main extends Application {
 		}
 
 		Button G = new Button("G");//creating a new button
-		G.setOnAction(e -> ToneDoor.playTone(1));
-		G.setOnAction(e-> tonePressed.add(2));
-		G.setOnAction(e-> interTone(primaryStage));
+		G.setOnAction(e -> {
+			ToneDoor.playTone(1);
+			tonePressed.add(2);
+			interTone(primaryStage);
+		});
 		G.setMinWidth(200);//setting values
 		G.setMinHeight(200);
 
@@ -571,7 +571,7 @@ public class Main extends Application {
 		root.setCenter(vbox);
 
 		return scene;
-//		primaryStage.setScene(scene);
+		//		primaryStage.setScene(scene);
 
 		//TODO create game over scene and set the scene
 
